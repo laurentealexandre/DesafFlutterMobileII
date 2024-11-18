@@ -1,16 +1,61 @@
-# crud_flutter
+CRUD Flutter com MySQL
+Configuração do Ambiente
+1. Requisitos
+•	Node.js
+•	XAMPP
+•	Flutter SDK
+•	Editor (VS Code recomendado)
+Executando o Projeto
+1. Iniciar Serviços
+1.	Abrir XAMPP e iniciar: 
+•	Apache
+•	MySQL
 
-A new Flutter project.
+2.	Iniciar API:
+•	cd crud_api 
+•	node server.js
+3.	Rodar o Flutter:
+•	cd crud_flutter 
+•	flutter run -d chrome
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Funcionalidades
+Tela Inicial
+•	Acesso a Clientes
+•	Acesso a Produtos
+•	Botões de cadastro para clientes
+•	Botões de cadastro para produtos 
+Clientes
+•	Listagem de clientes
+•	Cadastro de novo cliente
+•	Edição de cliente existente
+•	Exclusão de cliente
+•	Campos: 
+o	Nome (mín. 3, máx. 25 caracteres)
+o	Sobrenome (mín. 3, máx. 25 caracteres)
+o	Email (formato válido)
+o	Idade (1-120)
+o	Foto URL (opcional)
+Produtos
+•	Listagem de produtos
+•	Cadastro de novo produto
+•	Edição de produto existente
+•	Exclusão de produto
+•	Campos: 
+o	Nome (mín. 3, máx. 25 caracteres)
+o	Descrição (mín. 3, máx. 25 caracteres)
+o	Preço (0-120)
+o	Data de Atualização
+Validações
+•	Todos os campos obrigatórios são validados
+•	Email deve ter formato válido
+•	Idade deve ser entre 1 e 120
+•	Preço deve ser entre 0 e 120
+•	Nome e descrição devem ter entre 3 e 25 caracteres
+Mensagens do aplicativo
+•	Mensagens de sucesso/erro nas operações
+•	Confirmação antes de excluir
+•	Interface intuitiva e responsiva
+Observações
+•	O programa deve ser executado em um navegador web (Chrome de preferência)
+•	Certifique-se que todas as portas necessárias estão livres
+•	Mantenha o XAMPP e a API rodando durante o uso do sistema
