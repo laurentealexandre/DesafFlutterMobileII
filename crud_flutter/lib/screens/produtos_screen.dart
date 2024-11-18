@@ -1,4 +1,3 @@
-// lib/screens/produtos_screen.dart
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../models/produto.dart';
@@ -48,8 +47,19 @@ class _ProdutosScreenState extends State<ProdutosScreen> {
     }
   }
 
+  String _formatarData(String dataString) {
+    try {
+      final data = DateTime.parse(dataString);
+      return DateFormat('dd/MM/yyyy HH:mm').format(data);
+    } catch (e) {
+      return dataString;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final formatoMoeda = NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$');
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Produtos'),
@@ -69,49 +79,87 @@ class _ProdutosScreenState extends State<ProdutosScreen> {
                 final produto = _produtos[index];
                 return Card(
                   margin: const EdgeInsets.all(8),
-                  child: ListTile(
-                    title: Text(produto.nome),
-                    subtitle: Column(
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(produto.descricao),
-                        Text('R\$ ${produto.preco.toStringAsFixed(2)}'),
-                        Text('Atualizado: ${DateFormat('dd/MM/yyyy').format(produto.dataAtualizado)}'),
-                      ],
-                    ),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.edit),
-                          onPressed: () => Navigator.pushNamed(
-                            context,
-                            '/produto-form',
-                            arguments: produto,
-                          ).then((_) => _carregarProdutos()),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.delete),
-                          onPressed: () => showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: const Text('Confirmar exclusão'),
-                              content: const Text('Deseja realmente excluir este produto?'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  child: const Text('Cancelar'),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                produto.nome,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                    _deletarProduto(produto.id!);
-                                  },
-                                  child: const Text('Excluir'),
+                              ),
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.edit),
+                                  onPressed: () => Navigator.pushNamed(
+                                    context,
+                                    '/produto-form',
+                                    arguments: produto,
+                                  ).then((_) => _carregarProdutos()),
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  onPressed: () => showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: const Text('Confirmar exclusão'),
+                                      content: const Text(
+                                          'Deseja realmente excluir este produto?'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () => Navigator.pop(context),
+                                          child: const Text('Cancelar'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                            _deletarProduto(produto.id!);
+                                          },
+                                          child: const Text('Excluir'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          produto.descricao,
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        const SizedBox(height: 8),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              formatoMoeda.format(produto.preco),
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.green,
+                              ),
+                            ),
+                            Text(
+                              'Atualizado: ${_formatarData(produto.dataAtualizado)}',
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

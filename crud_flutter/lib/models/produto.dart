@@ -3,7 +3,7 @@ class Produto {
   final String nome;
   final String descricao;
   final double preco;
-  final DateTime dataAtualizado;
+  final String dataAtualizado; 
 
   Produto({
     this.id,
@@ -18,8 +18,8 @@ class Produto {
       id: map['id'],
       nome: map['nome'],
       descricao: map['descricao'],
-      preco: map['preco'],
-      dataAtualizado: map['data_atualizado'],
+      preco: double.parse(map['preco'].toString()),
+      dataAtualizado: map['data_atualizado'], 
     );
   }
 
@@ -29,7 +29,7 @@ class Produto {
       'nome': nome,
       'descricao': descricao,
       'preco': preco,
-      'data_atualizado': dataAtualizado.toIso8601String(),
+      'data_atualizado': dataAtualizado,
     };
   }
 }
