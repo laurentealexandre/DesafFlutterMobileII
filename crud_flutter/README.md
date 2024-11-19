@@ -51,12 +51,6 @@ Produtos
     o	Preço (0-120)
     o	Data de Atualização
 
-Validações
-•	Todos os campos obrigatórios são validados
-•	Email deve ter formato válido
-•	Idade deve ser entre 1 e 120
-•	Preço deve ser entre 0 e 120
-•	Nome e descrição devem ter entre 3 e 25 caracteres
 
 Mensagens do aplicativo
 •	Mensagens de sucesso/erro nas operações
